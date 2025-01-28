@@ -42,7 +42,7 @@ def extract_content_from_html(html: str) -> str:
         ret["content"],
         heading_style=markdownify.ATX,
     )
-    return content
+    return content.encode('charmap', errors='ignore').decode('charmap')  # <-- Changed line
 
 
 def get_robots_txt_url(url: str) -> str:
