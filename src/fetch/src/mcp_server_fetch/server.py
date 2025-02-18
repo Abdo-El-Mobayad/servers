@@ -132,7 +132,7 @@ async def fetch_url(
                 message=f"Failed to fetch {url} - status code {response.status_code}",
             ))
 
-        page_raw = response.text
+        page_raw = response.text.encode('charmap', errors='ignore').decode('charmap')  # Add encoding fix here
 
     content_type = response.headers.get("content-type", "")
     is_page_html = (
@@ -146,6 +146,7 @@ async def fetch_url(
         page_raw,
         f"Content type {content_type} cannot be simplified to markdown, but here is the raw content:\n",
     )
+
 
 
 class Fetch(BaseModel):
